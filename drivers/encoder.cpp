@@ -4,7 +4,7 @@ MotorEncoder::MotorEncoder(float GEAR_RATIO, uint8_t UNIT_RING, uint8_t EDGE_PER
 GEAR_RATIO(GEAR_RATIO), UNIT_RING(UNIT_RING), EDGE_PER_PERIOD(EDGE_PER_PERIOD)
 {
 }
-void MotorEncoder::init(MotorEncoder_InitParams init_params)
+void MotorEncoder::init(MotorEncoderInitParams init_params)
 {
     gpio_params = {init_params.PhraseA_GPIOx, init_params.PhraseA_Pin,
                    init_params.PhraseB_GPIOx, init_params.PhraseB_Pin};
@@ -39,8 +39,8 @@ float MotorEncoder::getAngVelocity(){
     uint32_t primask = __get_PRIMASK();
     __disable_irq();
     int8_t dir_cpy = this->time_params.dir;
-    DWT_Timestamp t0_cpy = this->time_params.t0;
-    DWT_Timestamp t1_cpy = this->time_params.t1;
+    timestamp_t t0_cpy = this->time_params.t0;
+    timestamp_t t1_cpy = this->time_params.t1;
     __enable_irq();
     __set_PRIMASK(primask);
 

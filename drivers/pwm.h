@@ -2,15 +2,9 @@
 #define PWM_H 
 
 #include "main.h"
-#include "tim.h"
+#include "smath.h"
 
 #ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-}
-
 class PWM{
 private:
     const int APB1_FREQ;

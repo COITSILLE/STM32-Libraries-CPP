@@ -1,10 +1,11 @@
 #ifndef __VECTOR_H__
 #define __VECTOR_H__
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <stdint.h>
 typedef struct{
     float x;
     float y;
@@ -17,6 +18,9 @@ typedef struct {
 } Vec3_t;
 #ifdef __cplusplus
 }
+#endif
+
+#ifdef __cplusplus
 static inline Vec2_t operator+(const Vec2_t& a, const Vec2_t& b){
     return {a.x + b.x, a.y + b.y};
 }
