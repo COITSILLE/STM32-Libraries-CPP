@@ -1,5 +1,4 @@
-#ifndef FILTER_H
-#define FILTER_H
+﻿#pragma once
 
 #include "main.h"
 #include "smath.h"
@@ -27,4 +26,3 @@ public:
     float get(float value);
 };
 
-#endif /* FILTER_H */

@@ -1,5 +1,4 @@
-#ifndef APP_CPP_DRIVERS_PWM_H
-#define APP_CPP_DRIVERS_PWM_H 
+﻿#pragma once
 
 #include "main.h"
 #include "smath.h"
@@ -15,4 +14,3 @@ public:
 };
 
 #endif
-#endif /* PWM_H */

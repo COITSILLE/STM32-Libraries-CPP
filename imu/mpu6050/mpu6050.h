@@ -1,5 +1,4 @@
-#ifndef MPU6050_H
-#define MPU6050_H
+﻿#pragma once
 
 #include "vector.h"
 #include "main.h"
@@ -47,4 +46,3 @@ private:
 
 #endif
 
-#endif // MPU6050_H

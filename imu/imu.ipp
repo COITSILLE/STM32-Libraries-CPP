@@ -1,5 +1,4 @@
-#ifndef __IMU_IPP__
-#define __IMU_IPP__
+#pragma once
 
 #include "dwt_ustime.h"
 #include "vector.h"
@@ -79,5 +78,3 @@ void IMU_Base<Sensor_i, _InitParams_>::setCalibration(const Vec3_t& accel_calibr
 }
 
 #endif
-
-#endif /* __IMU_IPP__ */

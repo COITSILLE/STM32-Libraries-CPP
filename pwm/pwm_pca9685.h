@@ -1,5 +1,4 @@
-#ifndef APP_CPP_PWM_PWM_PCA9685_H
-#define APP_CPP_PWM_PWM_PCA9685_H
+﻿#pragma once
 
 #include "pwm.h"
 
@@ -19,4 +18,3 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* APP_CPP_PWM_PWM_PCA9685_H */

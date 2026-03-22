@@ -1,5 +1,4 @@
-#ifndef FLASH_H
-#define FLASH_H 
+﻿#pragma once
 
 #include "main.h"
 #include <stdint.h>
@@ -71,4 +70,3 @@ static inline int Flash_Read(T *data, uint16_t len, FlashAddrs addr) {
 )
 #endif /* __cplusplus */
 
-#endif /* FLASH_H */

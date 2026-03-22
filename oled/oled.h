@@ -1,5 +1,4 @@
-#ifndef APP_OLED_H
-#define APP_OLED_H
+﻿#pragma once
 
 #include "font.h"
 #include <stdint.h>
@@ -66,10 +65,7 @@ public:
     
 };
 
-#ifndef APP_CPP_OLED_OLED_IPP
 #include "oled.ipp"
-#endif
 
 #endif /* __cplusplus */
 
-#endif /* APP_OLED_H */

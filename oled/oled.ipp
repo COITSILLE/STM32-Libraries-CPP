@@ -1,5 +1,4 @@
-#ifndef APP_CPP_OLED_OLED_IPP
-#define APP_CPP_OLED_OLED_IPP
+#pragma once
 
 #include "oled.h"
 
@@ -84,6 +83,4 @@ void OLED<DERIVED>::setString(const char* string, Pointer ptr, const Font *font,
     Pointer temp = ptr;
     this->setString(string, &temp, font, rspacing, cspacing, 0);
 }
-#endif /* APP_CPP_OLED_OLED_IPP */
-
-#endif /* OLED_IPP */
+#endif /* __cplusplus */

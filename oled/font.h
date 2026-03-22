@@ -1,5 +1,4 @@
-#ifndef FONT_H
-#define FONT_H
+﻿#pragma once
 
 #include <stdint.h>
 
@@ -24,4 +23,3 @@ extern const Font ASCII12;
 }
 #endif
 
-#endif /*FONT_H*/

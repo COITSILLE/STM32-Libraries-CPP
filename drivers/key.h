@@ -1,5 +1,4 @@
-#ifndef KEY_H
-#define KEY_H
+﻿#pragma once
 #include "main.h"
 #include <stdint.h>
 
@@ -17,7 +16,7 @@ typedef enum{
 } KeyEdgeType;
 
 #ifdef __cplusplus
-// C++ 代码放这里
+// C++ 浠ｇ爜鏀捐繖閲?
 class Key{
 private:
     KeyState state;
@@ -34,4 +33,3 @@ public:
 };
 #endif
 
-#endif

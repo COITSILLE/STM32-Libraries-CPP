@@ -1,5 +1,4 @@
-#ifndef __IMU_H__
-#define __IMU_H__
+﻿#pragma once
 
 
 #include "dwt_ustime.h"
@@ -26,7 +25,7 @@ public:
     /**
      * @brief Calculate calibration values for accelerometer and gyroscope
      * @param sample_times Number of samples to take for averaging
-     * @param expected_g Expected gravity value (typically 9.8 m/s²)
+     * @param expected_g Expected gravity value (typically 9.8 m/s虏)
      * @attention DO NOT run this function while the sensor is moving
      */
     void calibrate(float sample_times, float expected_g);
@@ -39,7 +38,7 @@ public:
 
     Vec3_t getCalibrationAccel() const { return this->calibration.accel; }
     Vec3_t getCalibrationGyro() const { return this->calibration.gyro; }
-    //TODO： Magnetometer support
+    //TODO锛?Magnetometer support
 protected:
     timestamp_t last_time = 0;
     Vec3_t last_euler_angles = {0.0f, 0.0f, 0.0f};
@@ -53,8 +52,5 @@ protected:
     } params;
 };
 
-#ifndef __IMU_IPP__
 #include "imu.ipp"
-#endif
 
-#endif /* __IMU_H__ */

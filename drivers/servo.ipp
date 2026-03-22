@@ -1,5 +1,4 @@
-#ifndef APP_DRIVERS_SERVO_IPP
-#define APP_DRIVERS_SERVO_IPP
+#pragma once
 
 #include "servo.h"
 
@@ -28,5 +27,3 @@ void Servo<PWMType>::setDeg(float angle){
 	float period = (angle - this->min_angle) / this->angle_range * this->period_range + this->min_period;
 	this->pwm->setTime(period);
 }
-
-#endif /* APP_DRIVERS_SERVO_IPP */

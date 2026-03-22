@@ -1,5 +1,4 @@
-#ifndef APP_CPP_PWM_PWM_TIM_H
-#define APP_CPP_PWM_PWM_TIM_H
+﻿#pragma once
 
 #include "pwm.h"
 
@@ -45,4 +44,3 @@ private:
 
 
 #endif /* __cplusplus */
-#endif /* APP_CPP_PWM_PWM_TIM_H */

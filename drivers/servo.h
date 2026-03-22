@@ -1,5 +1,4 @@
-#ifndef SERVO_H
-#define SERVO_H
+﻿#pragma once
 
 #include "pwm.h"
 
@@ -29,11 +28,8 @@ template <typename PWMType>
 template <typename PWMType>
 Servo(PWM<PWMType>*) -> Servo<PWMType>;
 
-#ifndef APP_DRIVERS_SERVO_IPP
 #include "servo.ipp"
-#endif
 
 
 #endif
 
-#endif /* SERVO_H */

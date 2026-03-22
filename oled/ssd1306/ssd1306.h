@@ -1,5 +1,4 @@
-#ifndef APP_SSD1306_H
-#define APP_SSD1306_H
+﻿#pragma once
 
 #include "i2c.h"
 #include "oled.h"
@@ -36,7 +35,6 @@ public:
         : hi2c(hi2c), address(address){}
 };
 
-#endif /* APP_SSD1306_H */
+#endif /* __cplusplus */
 
 
-#endif

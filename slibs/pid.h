@@ -1,5 +1,4 @@
-#ifndef PID_H
-#define PID_H 
+﻿#pragma once
 
 #include "main.h"
 #include "dwt_ustime.h"
@@ -47,5 +46,4 @@ public:
 };
 
 
-#endif
 #endif

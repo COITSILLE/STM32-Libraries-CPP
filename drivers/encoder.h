@@ -1,5 +1,4 @@
-#ifndef __MOTOR_ENCODER_H__
-#define __MOTOR_ENCODER_H__ 
+﻿#pragma once
 
 #include "main.h"
 #include "dwt_ustime.h"
@@ -58,4 +57,3 @@ private:
         int8_t dir = 0;
     } time_params;
 };
-#endif

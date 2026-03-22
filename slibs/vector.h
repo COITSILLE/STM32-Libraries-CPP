@@ -1,5 +1,4 @@
-#ifndef __VECTOR_H__
-#define __VECTOR_H__
+﻿#pragma once
 
 #include <stdint.h>
 
@@ -49,4 +48,3 @@ static inline Vec3_t vec3_sub(const Vec3_t* a, const Vec3_t* b){
 #endif /* __cplusplus */
 
 
-#endif /*__VECTOR_H__*/ 

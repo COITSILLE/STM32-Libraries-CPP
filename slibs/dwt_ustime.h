@@ -1,5 +1,4 @@
-#ifndef __DWT_USTIME_H__
-#define __DWT_USTIME_H__
+﻿#pragma once
 
 #include "main.h"
 #include <stdint.h>
@@ -44,4 +43,3 @@ static inline uint32_t getDistance(const timestamp_t start, const timestamp_t en
     }
 }
 
-#endif /* __DWT_USTIME_H__ */

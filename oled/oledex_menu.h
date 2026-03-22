@@ -1,5 +1,4 @@
-#ifndef APP_OEDEX_MENU_H
-#define APP_OEDEX_MENU_H
+﻿#pragma once
 
 #include "oled.h"
 #include <string.h>
@@ -144,11 +143,8 @@ template <typename OLEDType>
 OledExMenu(OLED<OLEDType>*, const Font*, uint8_t, uint8_t, char = '>') -> OledExMenu<OLEDType>;
 
 
-#ifndef APP_CPP_OLED_OEDEX_MENU_IPP
 #include "oledex_menu.ipp"
-#endif
 
 
 #endif /* __cplusplus */
 
-#endif /* APP_OEDEX_MENU_H */

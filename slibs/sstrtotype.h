@@ -1,5 +1,4 @@
-#ifndef SSTRTOTYPE_H
-#define SSTRTOTYPE_H
+﻿#pragma once
 
 #include <stdint.h>
 
@@ -20,4 +19,3 @@ void s_joinf(char *str, const char delim, const float *args, uint16_t argc, uint
 }
 #endif
 
-#endif

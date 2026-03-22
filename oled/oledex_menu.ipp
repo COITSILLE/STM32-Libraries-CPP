@@ -1,5 +1,4 @@
-#ifndef APP_CPP_OLED_OEDEX_MENU_IPP
-#define APP_CPP_OLED_OEDEX_MENU_IPP
+#pragma once
 
 #include "oledex_menu.h"
 
@@ -121,4 +120,3 @@ void OledExMenu<OLEDType>::enter(){
     }
 }
 
-#endif /* APP_CPP_OLED_OEDEX_MENU_IPP */

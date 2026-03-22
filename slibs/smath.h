@@ -1,5 +1,4 @@
-#ifndef SMATH_H
-#define SMATH_H
+﻿#pragma once
 
 #include <stdint.h>
 
@@ -38,4 +37,3 @@ float s_atan2(float y, float x);
 #endif
 
 
-#endif
