@@ -52,15 +52,27 @@ void SSD1306_I2C::init(){
 }
 
 void SSD1306_I2C::showFrame(){
-    uint8_t SendBuffer[this->col() + 1];
+    uint8_t SendBuffer[this->col + 1];
     SendBuffer[0] = 0x40;
-    for (uint8_t i = 0; i < this->page(); i++){
-        for (uint8_t j = 0; j < this->col(); j++){
+    for (uint8_t i = 0; i < this->page; i++){
+        for (uint8_t j = 0; j < this->col; j++){
             SendBuffer[j + 1] = this->GRAM[i][j];
         }
         sendCmd(0xB0 + i);
         sendCmd(0x00);
         sendCmd(0x10);
-        HAL_I2C_Master_Transmit(this->hi2c, this->address, SendBuffer, this->col() + 1, HAL_MAX_DELAY);
+        HAL_I2C_Master_Transmit(this->hi2c, this->address, SendBuffer, this->col + 1, HAL_MAX_DELAY);
     }
+}
+
+void SSD1306_I2C::setPixel(uint8_t x, uint8_t y, uint8_t state){
+    if (x >= this->col || y >= this->page * 8 || (state != 0 && state != 1)) {
+        return;
+    }
+    this->GRAM[y / 8][x] |= (state << (y % 8));
+}
+
+
+void SSD1306_I2C::clear(){
+    memset(this->GRAM, 0x00, sizeof(this->GRAM));
 }

@@ -1,5 +1,5 @@
-#ifndef OLED_IPP
-#define OLED_IPP
+#ifndef APP_CPP_OLED_OLED_IPP
+#define APP_CPP_OLED_OLED_IPP
 
 #include "oled.h"
 
@@ -15,22 +15,13 @@
  *| 
  *↓ Y
 */
-template<uint16_t COL, uint16_t PAGE>
-void OLED_Algorithms<COL, PAGE>::clear(){
-    memset(this->GRAM, 0x00, sizeof(this->GRAM));
-}
+
 
 //basic edit GRAM functions
-template<uint16_t COL, uint16_t PAGE>
-void OLED_Algorithms<COL, PAGE>::setPixel(uint8_t x, uint8_t y, uint8_t state){
-    if (x >= COL || y >= PAGE * 8 || (state != 0 && state != 1)) {
-        return;
-    }
-    this->GRAM[y / 8][x] |= (state << (y % 8));
-}
 
-template<uint16_t COL, uint16_t PAGE>
-void OLED_Algorithms<COL, PAGE>::setPicture(uint8_t* picture, uint8_t width, uint8_t height, Pointer ptr){
+
+template<typename DERIVED>
+void OLED<DERIVED>::setPicture(uint8_t* picture, uint8_t width, uint8_t height, Pointer ptr){
     uint8_t scale = height * width;
 
     for (uint8_t i = 0; i < scale; i++) {
@@ -46,16 +37,16 @@ void OLED_Algorithms<COL, PAGE>::setPicture(uint8_t* picture, uint8_t width, uin
 }
 
 //complex edit GRAM functions
-template<uint16_t COL, uint16_t PAGE>
-void OLED_Algorithms<COL, PAGE>::setChar(char character, Pointer ptr, const Font *font){
+template<typename DERIVED>
+void OLED<DERIVED>::setChar(char character, Pointer ptr, const Font *font){
     uint8_t scale = font->height * font->width;
 
     this->setPicture(font->letter + ((uint8_t)character - 32) * scale, 
                     font->width, font->height, ptr);
 }
 
-template<uint16_t COL, uint16_t PAGE>
-void OLED_Algorithms<COL, PAGE>::setString(const char* string, Pointer *ptr, const Font *font, uint8_t rspacing, uint8_t cspacing, bool backpointer){
+template<typename DERIVED>
+void OLED<DERIVED>::setString(const char* string, Pointer *ptr, const Font *font, uint8_t rspacing, uint8_t cspacing, bool backpointer){
     uint8_t width_r = font->width * 8;
 
     int8_t rspc_offset = width_r - rspacing;
@@ -66,7 +57,7 @@ void OLED_Algorithms<COL, PAGE>::setString(const char* string, Pointer *ptr, con
     uint8_t x_0 = ptr->x;
     uint8_t y_0 = ptr->y;
     
-    if ((len * (width_r - rspc_offset)) > (this->col() * (this->page() * 8 / (font->height - cspc_offset)))) {
+    if ((len * (width_r - rspc_offset)) > (DERIVED::col * (DERIVED::page * 8 / (font->height - cspc_offset)))) {
         return;
     }
 
@@ -76,7 +67,7 @@ void OLED_Algorithms<COL, PAGE>::setString(const char* string, Pointer *ptr, con
             ptr->x += width_r - rspc_offset;
         }
         
-        if (ptr->x + width_r - rspc_offset > this->col() || string[i + 1] == '\n'){
+        if (ptr->x + width_r - rspc_offset > DERIVED::col || string[i + 1] == '\n'){
             ptr->x = x_0;
             ptr->y += font->height - cspc_offset;
         }
@@ -88,11 +79,11 @@ void OLED_Algorithms<COL, PAGE>::setString(const char* string, Pointer *ptr, con
     }
 }
 
-template<uint16_t COL, uint16_t PAGE>
-void OLED_Algorithms<COL, PAGE>::setString(const char* string, Pointer ptr, const Font *font, uint8_t rspacing, uint8_t cspacing){
+template<typename DERIVED>
+void OLED<DERIVED>::setString(const char* string, Pointer ptr, const Font *font, uint8_t rspacing, uint8_t cspacing){
     Pointer temp = ptr;
     this->setString(string, &temp, font, rspacing, cspacing, 0);
 }
-#endif
+#endif /* APP_CPP_OLED_OLED_IPP */
 
 #endif /* OLED_IPP */

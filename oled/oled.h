@@ -1,5 +1,5 @@
-#ifndef OLED_H
-#define OLED_H
+#ifndef APP_OLED_H
+#define APP_OLED_H
 
 #include "font.h"
 #include <stdint.h>
@@ -15,44 +15,21 @@ typedef struct{
 
 #ifdef __cplusplus
 }
-class OLED{
-public:
-    OLED() = default;
-    virtual ~OLED() = default;
-    virtual void init() = 0;
-    virtual void clear() = 0;
-    virtual void showFrame() = 0;
-    virtual void setPixel(uint8_t x, uint8_t y, uint8_t state) = 0;
-    virtual void setPicture(uint8_t* picture, uint8_t width, uint8_t height, Pointer ptr) = 0;
-    virtual void setChar(char character, Pointer ptr, const Font *font) = 0;
-    virtual void setString(const char* string, Pointer *ptr, const Font *font,
-        uint8_t rspacing, uint8_t cspacing, bool backPointer = 1) = 0;
-    virtual void setString(const char* string, Pointer ptr, const Font *font,
-        uint8_t rspacing, uint8_t cspacing) = 0;
-    virtual uint16_t col() const = 0;
-    virtual uint8_t page() const = 0;
-protected:
-    virtual void sendCmd(uint8_t cmd) = 0;
+
+template <typename T>
+concept OLEDInterface = requires(T& oled) {
+    oled.showFrame();
 };
 
-template<uint16_t COL, uint16_t PAGE>
-class OLED_Algorithms : public OLED {
-protected:
-    uint8_t GRAM[PAGE][COL] = {};
+template<typename DERIVED>
+class OLED {
 public:
-    OLED_Algorithms() : OLED(){}
-    /**
-     * @brief Clear the GRAM buffer
-     * @note This function only clears the GRAM buffer. You need to call showFrame() to update the display after calling this function.
-     */
-    void clear() override;
-    /**
-     * @brief Set a pixel in the GRAM buffer
-     * @param x Range 0-127 (GRAM[][x]), begins at top left
-     * @param y Range 0-63 (GRAM[y/8][x], bit y%8) begins at top left
-     * @param state 1 to set pixel, 0 to clear pixel
-     */
-    void setPixel(uint8_t x, uint8_t y, uint8_t state) override;
+    OLED() = default;
+    void showFrame(){static_cast<DERIVED*>(this)->showFrame();}
+
+    void clear(){static_cast<DERIVED*>(this)->clear();};
+    void setPixel(uint8_t x, uint8_t y, uint8_t state){static_cast<DERIVED*>(this)->setPixel(x, y, state);}
+    
     /**
      * @brief Display a monochrome bitmap on the OLED screen
      * @param picture Pointer to the bitmap data array
@@ -61,8 +38,8 @@ public:
      * @param ptr Position pointer for the top-left corner of the bitmap
      * @note The bitmap data is stored in row-major order where each byte represents 8 horizontal pixels
      */
-    void setPicture(uint8_t* picture, uint8_t width, uint8_t height, Pointer ptr) override;
-    void setChar(char character, Pointer ptr, const Font *font) override;
+    void setPicture(uint8_t* picture, uint8_t width, uint8_t height, Pointer ptr);
+    void setChar(char character, Pointer ptr, const Font *font);
     /**
      * @brief Set a string on the OLED screen with pointer tracking
      * @param string String to display (ASCII characters + '\n' for newline)
@@ -74,7 +51,7 @@ public:
      * @attention String must consist of ASCII numbers, alphabets, symbols, spaces; only '\n' is supported for newline
      */
     void setString(const char* string, Pointer *ptr, const Font *font,
-        uint8_t rspacing, uint8_t cspacing, bool backpointer = 1) override;
+        uint8_t rspacing, uint8_t cspacing, bool backpointer = 1);
         /**
      * @brief Set a string on the OLED screen with pointer tracking
      * @param string String to display (ASCII characters + '\n' for newline)
@@ -85,16 +62,14 @@ public:
      * @attention String must consist of ASCII numbers, alphabets, symbols, spaces; only '\n' is supported for newline
      */
     void setString(const char* string, Pointer ptr, const Font *font,
-        uint8_t rspacing, uint8_t cspacing) override;
+        uint8_t rspacing, uint8_t cspacing);
     
-    uint16_t col() const override { return COL; }
-    uint8_t page() const override { return PAGE; }
 };
 
-#ifndef OLED_IPP
+#ifndef APP_CPP_OLED_OLED_IPP
 #include "oled.ipp"
 #endif
 
 #endif /* __cplusplus */
 
-#endif /* OLED_H */
+#endif /* APP_OLED_H */

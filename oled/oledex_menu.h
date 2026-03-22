@@ -1,5 +1,5 @@
-#ifndef OLED_MENU_H
-#define OLED_MENU_H
+#ifndef APP_OEDEX_MENU_H
+#define APP_OEDEX_MENU_H
 
 #include "oled.h"
 #include <string.h>
@@ -23,7 +23,7 @@ typedef struct Item_Typedef{
 
 typedef struct Frame{
     uint8_t focus_item_y;
-    pointer cur_item_ptr;
+    Pointer cur_item_ptr;
     Item_Typedef* cur_item;
     Item_Typedef* top_item;
     Item_Typedef* last_focus_item;
@@ -109,24 +109,28 @@ static uint8_t add_submenu_sign;
 #ifdef __cplusplus
 }
 
+template <typename OLEDType>
 class OledExMenu{
 private:
     Item_Typedef* focus_item;
-    pointer select_ptr;
-    pointer item_ref_ptr;
+    Pointer select_ptr;
+    Pointer item_ref_ptr;
     Frame frame;
+
 public:
     Item_Typedef* header = NULL;
-    OLED* oled;
+    OLED<OLEDType>* oled;
     const Font* font;
     uint8_t rspacing;
     uint8_t cspacing;
     char pointer_char;
 
-    OledExMenu(OLED* oled, const Font* font, uint8_t rspacing, uint8_t cspacing,
+    OledExMenu(OLED<OLEDType>* oled, const Font* font, uint8_t rspacing, uint8_t cspacing,
         char pointer_char = '>')
-        : oled(oled), font(font), rspacing(rspacing), cspacing(cspacing),
+        : focus_item(NULL), select_ptr{0, 0}, item_ref_ptr{0, 0}, frame{},
+        header(NULL), oled(oled), font(font), rspacing(rspacing), cspacing(cspacing),
         pointer_char(pointer_char) {}
+
     void init();
     void setFrame();
     void goNextItem();
@@ -136,7 +140,15 @@ public:
     void enter();
 };
 
+template <typename OLEDType>
+OledExMenu(OLED<OLEDType>*, const Font*, uint8_t, uint8_t, char = '>') -> OledExMenu<OLEDType>;
+
+
+#ifndef APP_CPP_OLED_OEDEX_MENU_IPP
+#include "oledex_menu.ipp"
+#endif
+
 
 #endif /* __cplusplus */
 
-#endif
+#endif /* APP_OEDEX_MENU_H */
