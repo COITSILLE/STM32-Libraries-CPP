@@ -1,5 +1,4 @@
-#ifndef __TB6612_H__
-#define __TB6612_H__
+﻿#pragma once
 #include "main.h"
 #include "pwm.h"
 #include "motor_state.h"
@@ -15,15 +14,20 @@ struct TB6612GPIOParams{
     uint16_t StbyPin;
 };
 
+template <typename PWMType>
 class TB6612_Motor{
 private:
     TB6612GPIOParams gpio_params;
-    PWM pwm;
+    PWM<PWMType>* pwm;
 public:
-    TB6612_Motor(PWM pwm) : pwm(pwm){};
+    TB6612_Motor(PWM<PWMType>* pwm) : pwm(pwm){};
     void init(TB6612GPIOParams init_params);
     void stby(bool state);
     void setControl(MotorState state);
     void setDuty(float duty);
 };
-#endif
+
+template <typename PWMType>
+TB6612_Motor(PWM<PWMType>*) -> TB6612_Motor<PWMType>;
+
+#include "tb6612.ipp"
